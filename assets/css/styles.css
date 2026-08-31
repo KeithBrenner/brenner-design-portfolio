@@ -397,6 +397,7 @@ img { max-width: 100%; display: block; }
 @media (max-width: 640px) {
   #canvas { padding: 20px; }
   .util-bar { flex-direction: column; gap: .6rem; align-items: flex-start; }
+  .util-bar__prevnext { align-self: flex-end; }
 
   /* Header is a single row: logo left, hamburger right -- falls back to
      the base .site-header flex rule (display:flex; justify-content:
