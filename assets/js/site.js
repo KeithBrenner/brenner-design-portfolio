@@ -71,13 +71,19 @@
     var hero = document.querySelector("[data-project-hero]");
     if (hero) hero.style.setProperty("--tile-color", project.color);
 
-    setText("[data-field='category']", project.category);
-    setText("[data-field='title']", project.title);
-    setText("[data-field='client']", project.client);
-    setText("[data-field='summary']", project.summary);
+    // Gallery placeholder tiles read the same --tile-color as the hero,
+    // via CSS inheritance -- set once on the container.
+    var gallery = document.querySelector("[data-project-gallery]");
+    if (gallery) gallery.style.setProperty("--tile-color", project.color);
 
-    var badge = document.querySelector("[data-field='placeholder-note']");
-    if (badge) badge.style.display = project.placeholder ? "inline-block" : "none";
+    setText("[data-field='client']", project.client);
+
+    var servicesList = document.querySelector("[data-field='services']");
+    if (servicesList && project.services) {
+      servicesList.innerHTML = project.services
+        .map(function (s) { return "<li>" + s + "</li>"; })
+        .join("");
+    }
 
     var prevLink = document.querySelector("[data-nav='prev']");
     var nextLink = document.querySelector("[data-nav='next']");

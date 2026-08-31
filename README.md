@@ -33,15 +33,28 @@ automatically.
 
 ### To add real photos instead of flat color tiles
 
-Right now each tile and project hero is just a flat color (set by the
-`color` field in `projects-data.js`) so the site works without any images
-yet. To use a real photo instead:
+Right now each tile, project hero, and the photo gallery on every project
+page are all just a flat color (set by the `color` field in
+`projects-data.js`) so the site works without any images yet. To use a
+real photo instead:
 
-1. Add your image file to `assets/images/` (create that folder).
-2. In `assets/css/styles.css`, the tile background and project hero both
-   read a `--tile-color` CSS variable — swap those two rules
-   (`.tile__bg` and `.project-hero`) to `background: url(...) center/cover`
-   instead, or ask Claude to wire this up for a specific project.
+1. Add your image file(s) to `assets/images/` (create that folder).
+2. In `assets/css/styles.css`, the home/grid tiles, the project hero, and
+   the gallery tiles all read the same `--tile-color` CSS variable —
+   swap the relevant rule (`.tile__bg`, `.project-hero`, or
+   `.gallery-item`) to `background: url(...) center/cover` instead, or
+   ask Claude to wire this up for a specific project. Since every
+   project page currently uses the same placeholder gallery pattern
+   (full-width photo, full-width photo, then two side-by-side), tell
+   Claude the layout you actually want for that project once you have
+   real photos and it'll rebuild that page's gallery to match.
+
+### To edit a project's "Services Provided" list
+
+Each project in `projects-data.js` has a `services` array — just a list
+of strings. Edit that array directly; the project page renders it
+automatically (it splits into two columns on its own, no HTML editing
+needed).
 
 ### To remove a project
 

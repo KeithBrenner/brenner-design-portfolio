@@ -234,47 +234,71 @@ img { max-width: 100%; display: block; }
 
 /* ---------- project hero / case study ---------- */
 .project-hero {
+  position: relative;
   width: 100%;
-  aspect-ratio: 21 / 9;
-  min-height: 260px;
+  aspect-ratio: 2 / 1;
+  min-height: 320px;
   background: var(--tile-color, #444);
-  display: flex;
-  align-items: flex-end;
-}
-.project-hero__inner {
-  padding: 2rem;
-  width: 100%;
-  color: #fff;
-}
-.project-hero__category {
-  font-size: .75rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  opacity: .85;
-  margin-bottom: .5rem;
-}
-.project-hero__title {
-  font-size: clamp(2rem, 5vw, 3.4rem);
 }
 
-.project-body {
+.project-intro {
   max-width: 760px;
   margin: 0 auto;
   padding: 3rem 2rem 1rem;
 }
-.project-body .placeholder-note {
-  display: inline-block;
-  font-size: .75rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  background: var(--accent);
-  color: var(--accent-ink);
-  padding: .3rem .6rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
+.project-intro__client {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin: 0 0 1rem;
 }
-.project-body p { color: var(--ink); font-size: 1.05rem; margin: 0 0 1rem; }
-.project-body p.muted { color: var(--muted); }
+.project-intro__summary {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 0 0 2rem;
+}
+
+.project-services__label {
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 .6rem;
+}
+.project-services__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  column-count: 2;
+  column-gap: 2.5rem;
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+/* ---------- project photo gallery ----------
+   Placeholder rhythm (matches Keith's mockup): full-width, full-width,
+   then a side-by-side pair. Reuses --tile-color like the hero -- once
+   real photos exist, swap each .gallery-item's background for an image
+   (see README) and this layout doesn't need to change. */
+.project-gallery {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.gallery-row {
+  display: grid;
+  gap: 4px;
+}
+.gallery-row--full { grid-template-columns: 1fr; }
+.gallery-row--half { grid-template-columns: repeat(2, 1fr); }
+.gallery-item {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--tile-color, #444);
+  overflow: hidden;
+}
+.gallery-row--half .gallery-item { aspect-ratio: 1 / 1; }
 
 .section-heading {
   padding: 3rem 0 1rem;
