@@ -120,6 +120,10 @@ img { max-width: 100%; display: block; }
   .project-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Home page: no intro copy above the grid anymore, so give it a little
+   breathing room below the header instead of butting right up against it. */
+.project-grid--home { margin-top: .5rem; }
+
 .tile {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -355,7 +359,16 @@ img { max-width: 100%; display: block; }
 }
 .site-footer a { text-decoration: none; color: var(--muted); }
 .site-footer a:hover { color: var(--accent); }
-.site-footer__links { display: flex; gap: 1.5rem; }
+.site-footer__links { display: flex; gap: 1rem; align-items: center; }
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: color .2s ease;
+}
+.social-icon:hover { color: var(--accent); }
 
 @media (max-width: 640px) {
   #canvas { padding: 20px; }

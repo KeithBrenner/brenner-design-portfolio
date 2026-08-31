@@ -91,5 +91,41 @@ const PROJECTS = [
     color: "#8a3b5c",
     summary: "A ground-up rebrand for a growing retail business, including identity, packaging, and in-store signage.",
     placeholder: true
+  },
+  {
+    slug: "shopify-storefront-02",
+    title: "Ecommerce Rebuild",
+    category: "Shopify Ecommerce Design & Dev",
+    client: "Client Name",
+    color: "#3f8f8a",
+    summary: "A ground-up Shopify rebuild for a growing DTC brand, from information architecture to a custom theme.",
+    placeholder: true
+  },
+  {
+    slug: "packaging-02",
+    title: "Packaging Refresh",
+    category: "Packaging",
+    client: "Client Name",
+    color: "#a3672e",
+    summary: "A packaging refresh across a full product line, balancing shelf standout with production practicality.",
+    placeholder: true
+  },
+  {
+    slug: "product-design-02",
+    title: "Product Design Concept",
+    category: "Product Design",
+    client: "Client Name",
+    color: "#6b4f9c",
+    summary: "Concept exploration and form development for a new product line, from sketch to refined prototype.",
+    placeholder: true
+  },
+  {
+    slug: "graphic-design-02",
+    title: "Brand Campaign Graphics",
+    category: "Graphic Design",
+    client: "Client Name",
+    color: "#c94f4f",
+    summary: "Campaign graphics across web, social, and print built to carry a consistent visual voice.",
+    placeholder: true
   }
 ];
