@@ -97,9 +97,56 @@
     if (el) el.textContent = new Date().getFullYear();
   }
 
+  // Mobile hamburger + drawer. The drawer sits in normal document flow
+  // right above the header (see styles.css), so opening it just pushes
+  // the header/grid down -- no overlay or scrim involved.
+  function initMobileNav() {
+    var toggle = document.querySelector(".mobile-nav-toggle");
+    var drawer = document.getElementById("mobile-nav");
+    if (!toggle || !drawer) return;
+
+    function closeDrawer() {
+      drawer.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+    }
+    function openDrawer() {
+      drawer.hidden = false;
+      toggle.setAttribute("aria-expanded", "true");
+    }
+
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (drawer.hidden) {
+        openDrawer();
+      } else {
+        closeDrawer();
+      }
+    });
+
+    // Clicking a link in the drawer closes it (the page is about to
+    // navigate anyway, but this keeps state clean if it doesn't).
+    var links = drawer.querySelectorAll("a");
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener("click", closeDrawer);
+    }
+
+    // Click anywhere outside the open drawer (and outside the toggle
+    // itself) closes it.
+    document.addEventListener("click", function (e) {
+      if (drawer.hidden) return;
+      if (drawer.contains(e.target) || toggle.contains(e.target)) return;
+      closeDrawer();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeDrawer();
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     renderGrids();
     renderProjectPage();
     setYear();
+    initMobileNav();
   });
 })();
