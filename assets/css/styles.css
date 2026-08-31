@@ -1,0 +1,358 @@
+/* =========================================================
+   Brenner Design LLC -- site styles
+   Brand tokens pulled from the coming-soon page: orange accent,
+   Oswald headings, DM Sans body. Light, work-forward layout
+   modeled after the reference site (petersdesigncompany.com).
+   ========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --ink: #17161a;
+  --bg: #f6f4f0;
+  --panel: #ffffff;
+  --muted: #6f6b64;
+  --line: rgba(23,22,26,.1);
+  --accent: #ff8807;
+  --accent-ink: #17161a;
+}
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+h1, h2, h3, .headline {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  margin: 0;
+}
+
+a { color: inherit; }
+
+img { max-width: 100%; display: block; }
+
+/* The single layout container for every page. Desktop spec:
+   max-width 1200px, centered, 20px padding on all sides. */
+#canvas {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ---------- header ---------- */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+}
+
+.site-header__logo {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+.site-header__logo svg { height: 28px; width: auto; }
+.site-header__logo span {
+  font-family: 'Oswald', sans-serif;
+  font-size: .95rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.site-nav { display: flex; gap: 2rem; }
+.site-nav a {
+  text-decoration: none;
+  font-size: .85rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-bottom: .2rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color .2s ease, color .2s ease;
+}
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  border-color: var(--accent);
+}
+
+/* ---------- hero / intro blurb ---------- */
+.intro {
+  padding: 1.5rem 0 3rem;
+}
+.intro__eyebrow {
+  font-size: .75rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 .75rem;
+}
+.intro h1 {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  max-width: 820px;
+}
+.intro p.lede {
+  margin-top: 1rem;
+  max-width: 640px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* ---------- project grid ---------- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  background: var(--bg);
+}
+@media (max-width: 900px) {
+  .project-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.tile {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+  overflow: hidden;
+  color: #fff;
+  isolation: isolate;
+}
+.tile__bg {
+  position: absolute;
+  inset: 0;
+  background: var(--tile-color, #444);
+  transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.tile:hover .tile__bg { transform: scale(1.05); }
+
+.tile__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);
+}
+
+.tile__content {
+  position: relative;
+  z-index: 1;
+  padding: 1.1rem 1.2rem;
+  width: 100%;
+}
+.tile__category {
+  display: block;
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .85;
+  margin-bottom: .3rem;
+}
+.tile__title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.tile__badge {
+  position: absolute;
+  top: .7rem;
+  right: .7rem;
+  z-index: 2;
+  font-size: .62rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,.9);
+  color: var(--ink);
+  padding: .25rem .5rem;
+  border-radius: 100px;
+}
+
+/* ---------- utility bar (back / prev-next) ---------- */
+.util-bar {
+  padding: 1.4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .85rem;
+  letter-spacing: .04em;
+}
+.util-bar a {
+  text-decoration: none;
+  color: var(--ink);
+}
+.util-bar a:hover { color: var(--accent); }
+.util-bar__prevnext { display: flex; gap: .6rem; align-items: center; color: var(--muted); }
+.util-bar__prevnext span { color: var(--line); }
+
+/* ---------- project hero / case study ---------- */
+.project-hero {
+  aspect-ratio: 21 / 9;
+  min-height: 260px;
+  background: var(--tile-color, #444);
+  display: flex;
+  align-items: flex-end;
+}
+.project-hero__inner {
+  padding: 2rem;
+  width: 100%;
+  color: #fff;
+}
+.project-hero__category {
+  font-size: .75rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: .85;
+  margin-bottom: .5rem;
+}
+.project-hero__title {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+}
+
+.project-body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 2rem 1rem;
+}
+.project-body .placeholder-note {
+  display: inline-block;
+  font-size: .75rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: .3rem .6rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+.project-body p { color: var(--ink); font-size: 1.05rem; margin: 0 0 1rem; }
+.project-body p.muted { color: var(--muted); }
+
+.section-heading {
+  padding: 3rem 0 1rem;
+}
+.section-heading h2 {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* ---------- about page ---------- */
+.about-block {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1rem 0 2rem;
+}
+.about-block p { font-size: 1.08rem; margin: 0 0 1.1rem; }
+
+.skills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  padding: 0 0 3rem;
+}
+.skill-pill {
+  font-size: .78rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  padding: .5rem 1rem;
+  border-radius: 100px;
+  color: var(--ink);
+}
+
+.testimonials {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 3.5rem 2rem;
+  margin-top: 1rem;
+}
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+@media (max-width: 900px) {
+  .testimonials__grid { grid-template-columns: 1fr; }
+}
+.testimonial blockquote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin: 0 0 1.2rem;
+  color: var(--ink);
+}
+.testimonial cite {
+  font-style: normal;
+  display: block;
+  font-size: .85rem;
+  color: var(--muted);
+}
+.testimonial cite strong { display: block; color: var(--ink); font-weight: 500; }
+
+/* ---------- contact page ---------- */
+.contact-block {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+  text-align: center;
+}
+.contact-block h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 1rem; }
+.contact-block p { color: var(--muted); font-size: 1.05rem; margin-bottom: 2rem; }
+.contact-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .85rem 1.8rem;
+  border-radius: 100px;
+  font-size: .82rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all .3s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn--primary { background: var(--accent); color: var(--accent-ink); }
+.btn--primary:hover { background: #ffa033; transform: translateY(-2px); }
+.btn--ghost { background: transparent; color: var(--ink); border: 2px solid var(--line); }
+.btn--ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+/* ---------- footer ---------- */
+.site-footer {
+  padding: 2.5rem 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .78rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  margin-top: 3rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.site-footer a { text-decoration: none; color: var(--muted); }
+.site-footer a:hover { color: var(--accent); }
+.site-footer__links { display: flex; gap: 1.5rem; }
+
+@media (max-width: 640px) {
+  #canvas { padding: 20px; }
+  .site-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .util-bar { flex-direction: column; gap: .6rem; align-items: flex-start; }
+}
