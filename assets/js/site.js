@@ -25,15 +25,17 @@
     var badge = project.placeholder
       ? '<span class="tile__badge">Placeholder</span>'
       : "";
+    // Reference-site look: flat color tile at rest, no visible label.
+    // On hover/focus, the tile screens back (lighter overlay) and the
+    // title fades in centered -- see .tile__scrim / .tile__title in
+    // styles.css. The title text lives in the DOM (not just CSS
+    // content) so it still reads fine to screen readers and on touch.
     return (
       '<a class="tile" href="' + tileHref(project.slug) + '" style="--tile-color:' + project.color + '">' +
         badge +
         '<span class="tile__bg"></span>' +
         '<span class="tile__scrim"></span>' +
-        '<span class="tile__content">' +
-          '<span class="tile__category">' + project.category + "</span>" +
-          '<span class="tile__title">' + project.title + "</span>" +
-        "</span>" +
+        '<span class="tile__title">' + project.title + "</span>" +
       "</a>"
     );
   }
