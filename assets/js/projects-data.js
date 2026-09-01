@@ -21,8 +21,16 @@
       "More Work" grid (drop the file in assets/images/, then point
       this at it, e.g. "assets/images/acme/tile.jpg" -- no leading
       slash, no "../", the site works out the right relative path).
-    - "heroImage": the photo for that project's page hero (top banner).
-  Leave either field out and that spot keeps using the flat "color"
+    - "heroImage": the photo for that project's page hero (top banner). By
+      default it fills the hero edge-to-edge (cropped as needed, like the
+      tile photo). For a logo mark on a flat color field instead (rather
+      than a full-bleed photo), also set "heroImageFit" -- see below.
+    - "heroImageFit": optional, only meaningful alongside "heroImage".
+      Set it to a CSS background-size value (e.g. "60%" or "contain") to
+      show the whole hero image centered and scaled to that size instead
+      of cropping it to fill the hero -- use this for a logo on a color
+      background. Leave it out for a normal full-bleed photo hero.
+  Leave "image"/"heroImage" out and that spot keeps using the flat "color"
   placeholder -- no code changes needed either way (see README).
 
   "services" is the list shown under "Services Provided" on the project
@@ -35,11 +43,12 @@ const PROJECTS = [
     title: "EGO Fishing",
     category: "Brand & Identity",
     client: "Client Name",
-    color: "#2f6b3a",
+    color: "#F30004",
     summary: "A full identity system built from strategy through to final guidelines -- logo, color, type, and applications.",
     services: ["Brand Development", "Identity Systems", "Naming", "Brand Standards", "Art Direction"],
     image: "assets/images/ego/EgoFishingLogo-Branding 287x287.jpg",
-    heroImage: "assets/images/ego/EgoFishingLogo-Branding 1160x900.jpg",
+    heroImage: "assets/images/ego/EGO Logo Silver GReg.svg",
+    heroImageFit: "60%",
     placeholder: true
   },
   {
