@@ -1,8 +1,8 @@
 /* =========================================================
    Brenner Design LLC -- site styles
    Brand tokens pulled from the coming-soon page: orange accent,
-   Oswald headings, DM Sans body. Light, work-forward layout
-   modeled after the reference site (petersdesigncompany.com).
+   DM Sans everywhere (headings and body). Light, work-forward
+   layout modeled after the reference site (petersdesigncompany.com).
    ========================================================= */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -29,7 +29,7 @@ body {
 }
 
 h1, h2, h3, .headline {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -.01em;
@@ -67,7 +67,7 @@ img { max-width: 100%; display: block; }
 }
 .site-header__logo svg { height: 50px; width: auto; }
 .site-header__logo span {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: .95rem;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -189,7 +189,7 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   text-align: center;
   padding: 1.5rem;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 600;
   font-size: 1.05rem;
   letter-spacing: .03em;
@@ -349,7 +349,7 @@ img { max-width: 100%; display: block; }
   .testimonials__grid { grid-template-columns: 1fr; }
 }
 .testimonial blockquote {
-  font-family: 'Playfair Display', serif;
+  font-family: 'DM Sans', sans-serif;
   font-style: italic;
   font-size: 1.2rem;
   line-height: 1.5;
