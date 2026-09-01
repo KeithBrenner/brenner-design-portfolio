@@ -91,12 +91,19 @@
       // see the note on .tile__bg in styles.css for why.
       if (project.heroImage) {
         hero.style.backgroundImage = "url('" + assetPath(project.heroImage) + "')";
-        // Full-bleed photo by default (styles.css sets background-size:
-        // cover); a project can opt into a centered, non-cropped logo
-        // treatment instead via heroImageFit (e.g. "60%" or "contain").
+        // Full-bleed photo by default (styles.css falls back to
+        // background-size: cover); a project can opt into a centered,
+        // non-cropped logo treatment instead via heroImageFit (e.g.
+        // "60%" or "contain"), passed through as a --custom-property so
+        // styles.css's mobile media query can override it independently
+        // via heroImageFitMobile (background-size itself can't be
+        // overridden by a plain inline style once one is set).
         if (project.heroImageFit) {
-          hero.style.backgroundSize = project.heroImageFit;
+          hero.style.setProperty("--hero-fit-desktop", project.heroImageFit);
           hero.style.backgroundRepeat = "no-repeat";
+        }
+        if (project.heroImageFitMobile) {
+          hero.style.setProperty("--hero-fit-mobile", project.heroImageFitMobile);
         }
       }
     }

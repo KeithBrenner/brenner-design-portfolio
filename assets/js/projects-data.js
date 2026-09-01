@@ -26,10 +26,15 @@
       tile photo). For a logo mark on a flat color field instead (rather
       than a full-bleed photo), also set "heroImageFit" -- see below.
     - "heroImageFit": optional, only meaningful alongside "heroImage".
-      Set it to a CSS background-size value (e.g. "60%" or "contain") to
+      Set it to a CSS background-size value (e.g. "45%" or "contain") to
       show the whole hero image centered and scaled to that size instead
       of cropping it to fill the hero -- use this for a logo on a color
       background. Leave it out for a normal full-bleed photo hero.
+    - "heroImageFitMobile": optional, only meaningful alongside
+      "heroImageFit". A different background-size to use on phone-width
+      screens only (e.g. a logo often wants to sit a bit larger/smaller
+      on a narrow hero than on desktop). Leave it out to use the same
+      size as "heroImageFit" on mobile too.
   Leave "image"/"heroImage" out and that spot keeps using the flat "color"
   placeholder -- no code changes needed either way (see README).
 
@@ -48,7 +53,8 @@ const PROJECTS = [
     services: ["Brand Development", "Identity Systems", "Naming", "Brand Standards", "Art Direction"],
     image: "assets/images/ego/EgoFishingLogo-Branding 287x287.jpg",
     heroImage: "assets/images/ego/EGO Logo Silver GReg.svg",
-    heroImageFit: "60%",
+    heroImageFit: "45%",
+    heroImageFitMobile: "60%",
     placeholder: true
   },
   {

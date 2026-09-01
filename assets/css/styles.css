@@ -249,8 +249,18 @@ img { max-width: 100%; display: block; }
   /* background-image (when a project has a "heroImage") is set inline
      via style.backgroundImage in site.js -- see the note on .tile__bg
      above for why this can't go through a --custom-property here. */
-  background-size: cover;
+  background-size: var(--hero-fit-desktop, cover);
   background-position: center;
+}
+@media (max-width: 640px) {
+  /* A project can set a different background-size just for phones (e.g.
+     a centered logo wants more room to breathe on a narrow hero) via
+     the --hero-fit-mobile custom property, set inline by site.js from
+     that project's "heroImageFitMobile" field. Falls back to the same
+     value used above if a project only sets a desktop fit. */
+  .project-hero {
+    background-size: var(--hero-fit-mobile, var(--hero-fit-desktop, cover));
+  }
 }
 
 .project-intro {
