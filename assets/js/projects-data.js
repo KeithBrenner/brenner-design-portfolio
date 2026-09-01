@@ -35,6 +35,9 @@
       screens only (e.g. a logo often wants to sit a bit larger/smaller
       on a narrow hero than on desktop). Leave it out to use the same
       size as "heroImageFit" on mobile too.
+    - "heroAspectRatio": optional. Overrides the hero banner's default
+      2:1 aspect-ratio for just this project, e.g. "3 / 2" for a taller
+      hero. Leave it out to use the site-wide default.
   Leave "image"/"heroImage" out and that spot keeps using the flat "color"
   placeholder -- no code changes needed either way (see README).
 
@@ -55,6 +58,7 @@ const PROJECTS = [
     heroImage: "assets/images/ego/EGO Logo Silver GReg.svg",
     heroImageFit: "45%",
     heroImageFitMobile: "60%",
+    heroAspectRatio: "3 / 2",
     placeholder: true
   },
   {

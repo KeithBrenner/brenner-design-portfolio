@@ -106,6 +106,11 @@
           hero.style.setProperty("--hero-fit-mobile", project.heroImageFitMobile);
         }
       }
+      // Overrides the site-wide default aspect-ratio (set in styles.css)
+      // for just this project's hero.
+      if (project.heroAspectRatio) {
+        hero.style.aspectRatio = project.heroAspectRatio;
+      }
     }
 
     // Gallery placeholder tiles read the same --tile-color as the hero,

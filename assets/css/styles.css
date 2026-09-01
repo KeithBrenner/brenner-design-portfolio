@@ -269,7 +269,7 @@ img { max-width: 100%; display: block; }
   padding: 3rem 2rem 1rem;
 }
 .project-intro__client {
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-size: 1.3rem;
   margin: 0 0 1rem;
 }
 .project-intro__summary {
