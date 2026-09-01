@@ -268,11 +268,11 @@ img { max-width: 100%; display: block; }
   list-style: none;
   margin: 0;
   padding: 0;
-  column-count: 2;
-  column-gap: 2.5rem;
+  /* column-count: 2; */
+  column-gap: 0.5rem;
   font-size: .85rem;
   color: var(--muted);
-  line-height: 1.9;
+  line-height: 1.5;
 }
 
 /* ---------- project photo gallery ----------
