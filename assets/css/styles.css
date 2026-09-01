@@ -161,7 +161,14 @@ img { max-width: 100%; display: block; }
 .tile__bg {
   position: absolute;
   inset: 0;
-  background: var(--tile-color, #444);
+  background-color: var(--tile-color, #444);
+  /* background-image (when a project has a real "image") is set inline
+     via style="" in site.js, NOT through a --custom-property here --
+     a url() inside a CSS custom property resolves relative to this
+     stylesheet's own location, not the HTML page using it, which
+     breaks the path. Setting it inline resolves correctly. */
+  background-size: cover;
+  background-position: center;
   transition: transform .45s cubic-bezier(.2,.7,.2,1);
 }
 .tile:hover .tile__bg,
@@ -238,7 +245,12 @@ img { max-width: 100%; display: block; }
   width: 100%;
   aspect-ratio: 2 / 1;
   min-height: 320px;
-  background: var(--tile-color, #444);
+  background-color: var(--tile-color, #444);
+  /* background-image (when a project has a "heroImage") is set inline
+     via style.backgroundImage in site.js -- see the note on .tile__bg
+     above for why this can't go through a --custom-property here. */
+  background-size: cover;
+  background-position: center;
 }
 
 .project-intro {

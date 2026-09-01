@@ -22,8 +22,17 @@
   }
 
   function tileHTML(project) {
-    var badge = project.placeholder
+    // Once a project has a real tile image, drop the "Placeholder" pill
+    // for it even if the rest of the copy (case study, etc.) isn't done --
+    // the pill is about the image, not the whole project.
+    var badge = (project.placeholder && !project.image)
       ? '<span class="tile__badge">Placeholder</span>'
+      : "";
+    // The real photo (when set) is applied as an inline background-image
+    // directly on .tile__bg, not through a --custom-property in
+    // styles.css -- see the note on .tile__bg there for why.
+    var bgStyle = project.image
+      ? ' style="background-image:url(\'' + assetPath(project.image) + '\')"'
       : "";
     // Reference-site look: flat color tile at rest, no visible label.
     // On hover/focus, the tile screens back (lighter overlay) and the
@@ -33,18 +42,25 @@
     return (
       '<a class="tile" href="' + tileHref(project.slug) + '" style="--tile-color:' + project.color + '">' +
         badge +
-        '<span class="tile__bg"></span>' +
+        '<span class="tile__bg"' + bgStyle + '></span>' +
         '<span class="tile__scrim"></span>' +
         '<span class="tile__title">' + project.title + "</span>" +
       "</a>"
     );
   }
 
-  // Grid containers exist both at site root (index.html) and one folder
-  // down (work/*.html), so hrefs need the right relative prefix.
+  // Grid containers, and per-project image files, exist relative to both
+  // the site root (index.html) and one folder down (work/*.html), so any
+  // path built from a slug or a "assets/..." path in projects-data.js
+  // needs the right relative prefix depending where the current page is.
+  function inWorkFolder() {
+    return location.pathname.indexOf("/work/") !== -1;
+  }
   function tileHref(slug) {
-    var inWorkFolder = location.pathname.indexOf("/work/") !== -1;
-    return (inWorkFolder ? "" : "work/") + slug + ".html";
+    return (inWorkFolder() ? "" : "work/") + slug + ".html";
+  }
+  function assetPath(path) {
+    return (inWorkFolder() ? "../" : "") + path.replace(/ /g, "%20");
   }
 
   function renderGrids() {
@@ -69,7 +85,14 @@
     var next = PROJECTS[(idx + 1) % PROJECTS.length];
 
     var hero = document.querySelector("[data-project-hero]");
-    if (hero) hero.style.setProperty("--tile-color", project.color);
+    if (hero) {
+      hero.style.setProperty("--tile-color", project.color);
+      // Inline background-image directly (not a --custom-property) --
+      // see the note on .tile__bg in styles.css for why.
+      if (project.heroImage) {
+        hero.style.backgroundImage = "url('" + assetPath(project.heroImage) + "')";
+      }
+    }
 
     // Gallery placeholder tiles read the same --tile-color as the hero,
     // via CSS inheritance -- set once on the container.

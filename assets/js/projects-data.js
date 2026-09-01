@@ -15,8 +15,15 @@
      reorder the grid.
 
   Colors are just flat placeholder tiles until you have real project
-  images -- swap "image" to a real file path (e.g. "/assets/images/acme-01.jpg")
-  and the CSS will use it automatically once you add that support (see README).
+  images. Add two optional fields per project to switch that project
+  over to real photos:
+    - "image": the square tile photo, shown on the home grid and the
+      "More Work" grid (drop the file in assets/images/, then point
+      this at it, e.g. "assets/images/acme/tile.jpg" -- no leading
+      slash, no "../", the site works out the right relative path).
+    - "heroImage": the photo for that project's page hero (top banner).
+  Leave either field out and that spot keeps using the flat "color"
+  placeholder -- no code changes needed either way (see README).
 
   "services" is the list shown under "Services Provided" on the project
   page -- edit it per project any time (it's just an array of strings).
@@ -24,13 +31,15 @@
 
 const PROJECTS = [
   {
-    slug: "brand-identity-01",
-    title: "New Brand Identity",
+    slug: "ego-fishing",
+    title: "EGO Fishing",
     category: "Brand & Identity",
     client: "Client Name",
     color: "#2f6b3a",
     summary: "A full identity system built from strategy through to final guidelines -- logo, color, type, and applications.",
     services: ["Brand Development", "Identity Systems", "Naming", "Brand Standards", "Art Direction"],
+    image: "assets/images/ego/EgoFishingLogo-Branding 287x287.jpg",
+    heroImage: "assets/images/ego/EgoFishingLogo-Branding 1160x900.jpg",
     placeholder: true
   },
   {
