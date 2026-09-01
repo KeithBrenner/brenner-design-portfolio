@@ -4,9 +4,13 @@
   Small vanilla-JS helper that reads assets/js/projects-data.js and:
     1. Renders the project grid (used on the home page and at the
        bottom of every project page) from the PROJECTS array.
-    2. On a project page, fills in the hero color/title/category/summary
-       and builds the prev/next links, based on <body data-slug="...">.
+    2. On a project page, builds the prev/next links, based on
+       <body data-slug="...">.
     3. Fills in the current year in the footer.
+
+  A project page's own content -- its heading, description, Services
+  Provided list, hero image, and photo gallery -- is plain HTML in that
+  page's own file, not rendered by this script. See README.md.
 
   No build step, no server required -- this all runs in the browser,
   including when you just double-click index.html on your own computer.
@@ -80,64 +84,17 @@
     if (!slug) return;
     var idx = findIndex(slug);
     if (idx === -1) return;
-    var project = PROJECTS[idx];
+    // Only the prev/next order comes from PROJECTS here -- the hero,
+    // gallery, heading, description, and services list are all plain
+    // HTML already in this page (see README.md), so there's nothing
+    // else to fill in from data.
     var prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length];
     var next = PROJECTS[(idx + 1) % PROJECTS.length];
-
-    var hero = document.querySelector("[data-project-hero]");
-    if (hero) {
-      hero.style.setProperty("--tile-color", project.color);
-      // Inline background-image directly (not a --custom-property) --
-      // see the note on .tile__bg in styles.css for why.
-      if (project.heroImage) {
-        hero.style.backgroundImage = "url('" + assetPath(project.heroImage) + "')";
-        // Full-bleed photo by default (styles.css falls back to
-        // background-size: cover); a project can opt into a centered,
-        // non-cropped logo treatment instead via heroImageFit (e.g.
-        // "60%" or "contain"), passed through as a --custom-property so
-        // styles.css's mobile media query can override it independently
-        // via heroImageFitMobile (background-size itself can't be
-        // overridden by a plain inline style once one is set).
-        if (project.heroImageFit) {
-          hero.style.setProperty("--hero-fit-desktop", project.heroImageFit);
-          hero.style.backgroundRepeat = "no-repeat";
-        }
-        if (project.heroImageFitMobile) {
-          hero.style.setProperty("--hero-fit-mobile", project.heroImageFitMobile);
-        }
-      }
-      // Overrides the site-wide default aspect-ratio (set in styles.css)
-      // for just this project's hero.
-      if (project.heroAspectRatio) {
-        hero.style.aspectRatio = project.heroAspectRatio;
-      }
-    }
-
-    // Gallery placeholder tiles read the same --tile-color as the hero,
-    // via CSS inheritance -- set once on the container.
-    var gallery = document.querySelector("[data-project-gallery]");
-    if (gallery) gallery.style.setProperty("--tile-color", project.color);
-
-    setText("[data-field='client']", project.client);
-
-    var servicesList = document.querySelector("[data-field='services']");
-    if (servicesList && project.services) {
-      servicesList.innerHTML = project.services
-        .map(function (s) { return "<li>" + s + "</li>"; })
-        .join("");
-    }
 
     var prevLink = document.querySelector("[data-nav='prev']");
     var nextLink = document.querySelector("[data-nav='next']");
     if (prevLink) { prevLink.href = prev.slug + ".html"; prevLink.textContent = "← Prev"; }
     if (nextLink) { nextLink.href = next.slug + ".html"; nextLink.textContent = "Next →"; }
-
-    document.title = project.title + " — Brenner Design LLC";
-  }
-
-  function setText(selector, value) {
-    var el = document.querySelector(selector);
-    if (el) el.textContent = value;
   }
 
   function setYear() {

@@ -239,27 +239,40 @@ img { max-width: 100%; display: block; }
 .util-bar__prevnext { display: flex; gap: .6rem; align-items: center; color: var(--muted); }
 .util-bar__prevnext span { color: var(--line); }
 
-/* ---------- project hero / case study ---------- */
+/* ---------- project hero / case study ----------
+   Everything about a project's hero is set with plain inline style=""
+   attributes directly in that project's work/<slug>.html file -- see
+   the "Editing a project page" section in README.md. In short, on the
+   <div class="project-hero" data-project-hero> element you can set:
+     - background-color: a flat field color (falls back to #444 below
+       if you don't set one).
+     - background-image: url('...') for a photo or an SVG logo.
+     - aspect-ratio: overrides the 2/1 default below, e.g. "3 / 2".
+     - --bg-fit: how the image is sized. Use "cover" (the default, via
+       the fallback below) for a photo that should fill the hero edge-
+       to-edge, cropped as needed. Use a percentage like "45%" or the
+       keyword "contain" to show the WHOLE image centered and scaled
+       down instead -- this is what you want for a centered logo mark
+       on a color field.
+     - --bg-fit-mobile: optional. A different --bg-fit just for phone-
+       width screens (the @media block below), e.g. if a logo should
+       sit a bit larger on a narrow hero than it does on desktop.
+   .gallery-item below (in the photo gallery section) supports the
+   exact same four properties, the same way, for the same reasons. */
 .project-hero {
   position: relative;
   width: 100%;
   aspect-ratio: 2 / 1;
   min-height: 320px;
-  background-color: var(--tile-color, #444);
-  /* background-image (when a project has a "heroImage") is set inline
-     via style.backgroundImage in site.js -- see the note on .tile__bg
-     above for why this can't go through a --custom-property here. */
-  background-size: var(--hero-fit-desktop, cover);
+  background-color: #444;
+  background-repeat: no-repeat;
+  background-size: var(--bg-fit, cover);
   background-position: center;
 }
 @media (max-width: 640px) {
-  /* A project can set a different background-size just for phones (e.g.
-     a centered logo wants more room to breathe on a narrow hero) via
-     the --hero-fit-mobile custom property, set inline by site.js from
-     that project's "heroImageFitMobile" field. Falls back to the same
-     value used above if a project only sets a desktop fit. */
-  .project-hero {
-    background-size: var(--hero-fit-mobile, var(--hero-fit-desktop, cover));
+  .project-hero,
+  .gallery-item {
+    background-size: var(--bg-fit-mobile, var(--bg-fit, cover));
   }
 }
 
@@ -298,10 +311,16 @@ img { max-width: 100%; display: block; }
 }
 
 /* ---------- project photo gallery ----------
-   Placeholder rhythm (matches Keith's mockup): full-width, full-width,
-   then a side-by-side pair. Reuses --tile-color like the hero -- once
-   real photos exist, swap each .gallery-item's background for an image
-   (see README) and this layout doesn't need to change. */
+   Default rhythm: full-width, full-width, then a side-by-side pair --
+   just a starting layout, not a rule. Add, remove, or reorder
+   .gallery-row/.gallery-item elements in the HTML for a different
+   pattern; each row is a CSS grid so a .gallery-row--full is 1 column
+   and a .gallery-row--half is 2, but there's nothing stopping you from
+   adding e.g. a .gallery-row--full row with 3 .gallery-item children
+   sized by their own inline aspect-ratio instead.
+   Each .gallery-item supports the same background-color / background-
+   image / aspect-ratio / --bg-fit / --bg-fit-mobile inline style=""
+   properties as .project-hero above -- see the comment there. */
 .project-gallery {
   margin-top: 2.5rem;
   display: flex;
@@ -317,7 +336,10 @@ img { max-width: 100%; display: block; }
 .gallery-item {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: var(--tile-color, #444);
+  background-color: #444;
+  background-repeat: no-repeat;
+  background-size: var(--bg-fit, cover);
+  background-position: center;
   overflow: hidden;
 }
 .gallery-row--half .gallery-item { aspect-ratio: 1 / 1; }
